@@ -156,9 +156,20 @@ public class ToDoDAOImpl implements ToDoDAO {
   }
 
   @Override
-  public boolean markTaskCompleted(int taskId, int regId) {
-    return false;
+  public boolean markTaskCompleted(int regid, int taskid) {
+   boolean flag=false;
+   try {
+    int i=stmt.executeUpdate("update tasks set taskstatus=3 where regid="+regid+" and taskid="+taskid);
+    if(i==1) {
+     flag=true;
+     System.out.println("Task "+taskid+" of "+regid+" completed");
+    }
+   } catch(Exception e) {
+    e.printStackTrace();
+   }
+   return flag;
   }
+ 
 
   @Override
   public String getFLNameByRegID(int regId) {
